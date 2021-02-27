@@ -51,6 +51,51 @@
     <!-- end panel -->
 </div>
 <!-- /.row -->
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+<script type="text/javascript">
+    console.log("==================");
+    console.log("JS TEST");
+    var bnoValue = '<c:out value="${board.bno}"/>';
+    // for replyService add test
+    // replyService.add(
+    //     {reply:"JS Test", replyer:"tester", bno:bnoValue},
+    //     function (result) {
+    //         alert("RESULT: " + result);
+    //     }
+    // );
+
+    // reply List Test
+    // replyService.getList({bno:bnoValue, page:1}, function(list) {
+    //     for(var i=0, len=list.length||0; i<len; i++) {
+    //         console.log(list[i]);
+    //     }
+    // });
+
+    // reply Remove Test
+    // replyService.remove(9, function (count) {
+    //     console.log(count);
+    //     if (count === "success") {
+    //         alert("REMOVED");
+    //     }
+    // }, function (err) {
+    //     alert("ERROR...");
+    // });
+
+    // reply Update Test
+    // replyService.update({
+    //     rno: 8,
+    //     bno: bnoValue,
+    //     reply: "Modified Reply....",
+    //     replyer: "modifier"
+    // }, function (result) {
+    //     alert('수정 완료...');
+    // });
+
+    // reply Get Test...
+    // replyService.get(10, function (data) {
+    //     console.log(data);
+    // });
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         var operForm = $('#operForm');
