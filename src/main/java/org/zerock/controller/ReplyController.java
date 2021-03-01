@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.ReplyPageDTO;
 import org.zerock.domain.ReplyVO;
 import org.zerock.service.ReplyService;
 
@@ -35,16 +36,12 @@ public class ReplyController {
 
     // 특정 게시물의 댓글 목록 확인
     @GetMapping(value = "/pages/{bno}/{page}",
-        produces = {
-            MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE
-        })
-    public ResponseEntity<List<ReplyVO>> getList(
-            @PathVariable("page") int page, @PathVariable("bno") Long bno) {
-        log.info("getList.........................");
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
         Criteria cri = new Criteria(page,10);
-        log.info(cri);
-        return new ResponseEntity<>(service.getList(cri,bno),
-                HttpStatus.OK);
+        log.info("get Reply List bno: " + bno);
+        log.info("cri: " + cri);
+        return new ResponseEntity<>(service.getListPage(cri,bno), HttpStatus.OK);
     }
 
     //댓글 조회
@@ -68,7 +65,10 @@ public class ReplyController {
 
     // 댓글 수정
     @RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH },
-    value = "/{rno}", consumes = "application/json", produces = "application/text")
+    value = "/{rno}", consumes = "application/json",
+//            produces = "application/text"
+            produces = { MediaType.TEXT_PLAIN_VALUE }
+    )
     public ResponseEntity<String> modify(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
         vo.setRno(rno);
         log.info("rno " + rno);

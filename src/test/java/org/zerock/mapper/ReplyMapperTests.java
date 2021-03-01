@@ -60,9 +60,10 @@ public class ReplyMapperTests {
 
     @Test
     public void testUpdate() {
-        Long targetRno = 10L;
+//        Long targetRno = 10L;
+        Long targetRno = 24L;
         ReplyVO vo = mapper.read(targetRno);
-        vo.setReply("Update Reply ");
+        vo.setReply("댓글을 수정했다요");
         int count = mapper.update(vo);
         log.info("UPDATE COUNT: " + count);
     }
@@ -72,6 +73,13 @@ public class ReplyMapperTests {
         Criteria cri = new Criteria();
         //141L
         List<ReplyVO> replies = mapper.getListWithPaging(cri, bnoArr[0]);
+        replies.forEach(reply -> log.info(reply));
+    }
+
+    @Test
+    public void testList2() {
+        Criteria cri = new Criteria(2,10);
+        List<ReplyVO> replies = mapper.getListWithPaging(cri,140L);
         replies.forEach(reply -> log.info(reply));
     }
 }
